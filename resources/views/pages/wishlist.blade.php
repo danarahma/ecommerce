@@ -68,7 +68,7 @@
 
 	@if(session('wishlist'))
     <div class="alert alert-success alert-dismisable fade show" role="alert">
-        <strong>{{ session('cart') }}</strong>
+        <strong>{{ session('wishlist') }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

@@ -83,6 +83,14 @@
                     <div class="section-title">
                         <h2>Featured Product</h2>
                     </div>
+                    @if(session('cart'))
+                    <div class="alert alert-success alert-dismisable fade show" role="alert">
+                        <strong>{{ session('cart') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
@@ -103,7 +111,7 @@
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->image_one) }}">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="{{ url('add/to-wishlist/'.$product->id) }}"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <form action="{{ url('add/to-cart/'.$product->id) }}" method="POST">
                                             @csrf
@@ -113,7 +121,7 @@
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
-                                    <h6><a href="#">{{ $product->product_name }}</a></h6>
+                                    <h6><a href="{{ url('product/details') }}">{{ $product->product_name }}</a></h6>
                                     <h5>${{ $product->price }}</h5>
                                 </div>
                             </div>

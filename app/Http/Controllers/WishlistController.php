@@ -17,7 +17,7 @@ class WishlistController extends Controller
 
     		return Redirect()->back()->with('cart', 'Product added On Wishlist');
     	} else{
-    		return Redirect()->route()->back()->with('loginError', 'At First Login Your Account');
+    		return Redirect()->route('login')->with('loginError', 'At First Login Your Account');
     	}
     }
 

@@ -76,7 +76,11 @@ Route::post('cart/quantity/update/{cart_id}', 'CartController@UpdateQty');
 Route::post('coupon/apply', 'CartController@CouponApply');
 
 
-Route::post('add/to-wishlist/{product_id}', 'WishlistController@addToWishlist');
+Route::get('add/to-wishlist/{product_id}', 'WishlistController@addToWishlist');
 Route::get('wishlist', 'WishlistController@wishlist');
 Route::get('wishlist/destroy/{wishlist_id}', 'WishlistController@Destroy')->name('cart.destroy');
+
+
+
+Route::get('product/details/{product_id}', 'FrontEndController@details');
 

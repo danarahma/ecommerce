@@ -15,4 +15,9 @@ class FrontendController extends Controller
     	$lts_p = Product::where('status', 1)->latest()->limit(3)->get();
     	return view('pages.index', compact('products', 'categories', 'lts_p'));
     }
+
+
+    public function details(){
+    	return view('pages.product-details');
+    }
 }
