@@ -74,6 +74,7 @@ Route::get('cart', 'CartController@Cart')->name('cart');
 Route::get('cart/destroy/{cart_id}', 'CartController@CartDestroy')->name('cart.destroy');
 Route::post('cart/quantity/update/{cart_id}', 'CartController@UpdateQty');
 Route::post('coupon/apply', 'CartController@CouponApply');
+Route::get('coupon/destroy', 'CartController@CouponDestroy');
 
 
 Route::get('add/to-wishlist/{product_id}', 'WishlistController@addToWishlist');
@@ -84,3 +85,7 @@ Route::get('wishlist/destroy/{wishlist_id}', 'WishlistController@Destroy')->name
 
 Route::get('product/details/{product_id}', 'FrontEndController@details');
 
+
+Route::get('checkout', 'CheckoutController@index');
+Route::post('place/order', 'OrderController@storeOrder')->name('place-order');
+Route::get('order/success', 'OrderController@orderSuccess');

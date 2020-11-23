@@ -148,16 +148,18 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-
 		                	@if(Session::has('coupon'))
 	                            <li>Subtotal <span>${{ $subtotal }}</span></li>
-	                            <li>Discount <span>{{ session()->get('coupon')['coupon_discount'] }}% ( {{ $discount = $subtotal * session()->get('coupon')['coupon_discount'] / 100 }} tk)</span></li>
-	                            <li>Total <span>${{ $subtotal - $discount }}</span></li>
+
+                                <li>Coupon <span>{{ session()->get('coupon')['coupon_name'] }} <a href="{{ url('coupon/destroy') }}">X</a></span></li>
+
+	                            <li>Discount <span>{{ session()->get('coupon')['coupon_discount'] }}% ( {{ session()->get('coupon')['discount_amount'] }} tk)</span></li>
+	                            <li>Total <span>${{ $subtotal - session()->get('coupon')['discount_amount'] }}</span></li>
 		                	@else
                             	<li>Total <span>${{ $subtotal }}</span></li>
                             @endif
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="{{ url('checkout') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

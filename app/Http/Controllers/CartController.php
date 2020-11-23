@@ -32,13 +32,11 @@ class CartController extends Controller
     public function Cart() {
 
         $carts = Cart::where('user_ip', request()->ip())->latest()->get();
-        $total = Cart::all()->where('user_ip', request()->ip())->sum(function($t){
-                                return $t->price * $t->qty;
-                            });
+        
         $subtotal = Cart::all()->where('user_ip', request()->ip())->sum(function($t){
                                 return $t->price * $t->qty;
                             });
-        return view('pages.cart', compact('carts', 'total', 'subtotal'));
+        return view('pages.cart', compact('carts', 'subtotal'));
     }
 
     public function CartDestroy($cart_id) {
@@ -61,14 +59,26 @@ class CartController extends Controller
         $check = Coupon::where('coupon_name', $request->coupon_name)->first();
         if ($check) {
 
+            $subtotal = Cart::all()->where('user_ip', request()->ip())->sum(function($t){
+                return $t->price * $t->qty;
+            });
+
             Session::put('coupon',[
                 'coupon_name' => $check->coupon_name,
                 'coupon_discount' => $check->discount,
+                'discount_amount' => $subtotal * ($check->discount/100),
             ]);
             return Redirect()->back()->with('cart', 'Successfully Coupon Applied ');
             
         } else {
             return Redirect()->back()->with('cart', 'Invalid Coupon');
+        }
+    }
+
+    public function CouponDestroy(){
+        if (Session::has('coupon')) {
+            session()->forget('coupon');
+            return Redirect()->back()->with('cart', 'Coupon Removed Success');
         }
     }
 }
