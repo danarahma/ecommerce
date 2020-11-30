@@ -85,6 +85,9 @@ Route::get('wishlist', 'WishlistController@wishlist');
 Route::get('wishlist/destroy/{wishlist_id}', 'WishlistController@Destroy')->name('cart.destroy');
 
 
+Route::get('shop/', 'FrontEndController@shopPage')->name('shop.page');
+
+Route::get('category/product-show/{cat_id}', 'FrontendController@showProduct');
 
 Route::get('product/details/{product_id}', 'FrontEndController@details');
 
@@ -92,3 +95,8 @@ Route::get('product/details/{product_id}', 'FrontEndController@details');
 Route::get('checkout', 'CheckoutController@index');
 Route::post('place/order', 'OrderController@storeOrder')->name('place-order');
 Route::get('order/success', 'OrderController@orderSuccess');
+
+
+
+Route::get('user/order', 'UserController@order')->name('user.order');
+Route::get('user/order-view/{order_id}', 'UserController@viewOrder');
